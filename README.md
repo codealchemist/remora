@@ -22,6 +22,7 @@ Commands fired thru the remote control page will be broadcasted almost instantly
 Remora uses Meteor as a javascript server side component, but don't worry, it will easily run in any normal computer.
 The Meteor instance is the central communication point between any Remoras attached to any number of Grooveshark instances.
 The remote control instance is separate from Meteor right now, so you can serve it with Apache or any other web server.
+It's based on Twitter's Bootstrap (http://twitter.github.com/bootstrap).
 
 You should also check http://meteor.com, which is a fascinating tool!
 
