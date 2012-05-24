@@ -42,13 +42,13 @@ We might think about sync in the future.
 ## Install
 * Download or clone this repo
 
-	git clone git@github.com:codealchemist/remora.git
+	`git clone git@github.com:codealchemist/remora.git`
 
 * Change the default Remora domain name in the files:
 
-	js/inject.js
-	js/remora.local.js
-	js/remora.meteor.js
+	`js/inject.js`
+	`js/remora.local.js`
+	`js/remora.meteor.js`
 
 This can be any domain where you want to run Remora.
 You can use local network names or IPs to run inside a LAN.
@@ -56,10 +56,10 @@ You can use local network names or IPs to run inside a LAN.
 * Copy the source for js/inject.js into your clipboard
 * Create a new bookmark in your web browser and paste inject code into location
 * Install Meteor
-	curl install.meteor.com | /bin/sh
+	`curl install.meteor.com | /bin/sh`
 * Run Remora's Meteor instance
-	cd remora/meteor
-	meteor
+	`cd remora/meteor`
+	`meteor`
 * Open http://grooveshark.com/html5
 * Click your Remora bookmark
 * Open Remora's remote control page
