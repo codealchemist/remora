@@ -46,11 +46,11 @@ We might think about sync in the future.
 
 * Change the default Remora domain name in the files:
 
-	`js/inject.js`
+	`js/inject.js
 
-	`js/remora.local.js`
+	js/remora.local.js
 
-	`js/remora.meteor.js`
+	js/remora.meteor.js`
 
 This can be any domain where you want to run Remora.
 You can use local network names or IPs to run inside a LAN.
