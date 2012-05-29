@@ -55,3 +55,7 @@ Remora.api = function(method, params) {
 		iframe.get(0).contentWindow
 	);
 };
+
+if (location.host == 'grooveshark.com') {
+	alert('Remora attached!');
+}
