@@ -44,8 +44,9 @@
     </div>
 
     <div class="container">
-		<h1>Remora</h1>
-		<p>A multi instance remote control for your beloved Grooveshark music!</p>
+		<h2>A Grooveshark Remote Experience</h2>
+		<p>Multi instance remote control for your beloved Grooveshark music!</p>
+		<br />
 
 		<button id="play" class="btn btn-large btn-primary" onclick="Remora.api('play')"><i class="icon-play"></i>Play</button>
 		<button id="pause" class="btn btn-large btn-info" onclick="Remora.api('pause')"><i class="icon-pause"></i> Pause</button>
@@ -56,6 +57,17 @@
 		<div style="margin:20px;">
 			<div id="volume" style="width:535px; float:left; margin:0 5px 0 0"></div>
 			<i class="icon-volume-up"></i>
+		</div>
+
+		<br /><br /><br />
+		<hr />
+		<div>
+			<h3>Bookmarklet</h3>
+			The Remora bookmarklet lets you easily attach Remora to a <a href="http://grooveshark.com/html5" target="_blank">Grooveshark instance</a>.<br />
+			Drag and drop the following link into your bookmarks bar:<br />
+			<a href="" id="bookmarklet">
+				Attach Remora
+			</a>
 		</div>
     </div> <!-- /container -->
 
@@ -74,6 +86,8 @@
 					Remora.api('setVolume', ui.value);
 				}
 			});
+
+			$('#bookmarklet').attr('href', "javascript:var e=document.createElement('script');e.setAttribute('src','" + location.href + "js/remora.local.js');document.body.appendChild(e);var e=document.createElement('iframe');e.setAttribute('id','remora');e.setAttribute('src','http://" + location.host + ":3000');e.setAttribute('style','display:none;');document.body.appendChild(e);void(0);");
 		});
 	</script>
   </body>
