@@ -1,0 +1,1 @@
+javascript:var e=document.createElement('script');e.setAttribute('src','http://albertomiranda.com.ar/remora/public/js/remora.site.js');document.body.appendChild(e);var e=document.createElement('iframe');e.setAttribute('id','remora');e.setAttribute('src','http://albertomiranda.com.ar:3000');e.setAttribute('style','display:none;');document.body.appendChild(e);void(0);

@@ -1,0 +1,41 @@
+//API namesapce
+var Remora = {};
+
+/**
+ * Handles communication between instances.
+ * Posts passed request to server thru iframe proxy 
+ *
+ * @param {string} method
+ * @param {object} params
+ */
+Remora.api = function(method, params) {
+	params = params || null;
+	if (!method) {
+		console.log("--> Remora.api: ERROR: No method specified.");
+		return false;
+	}
+	var message = "Remora.api: METHOD: " + method + ", PARAMS: " + JSON.stringify(params);
+	var request = {"message": message, "method": method, "params": params}; 
+	var requestString = JSON.stringify(request);
+	console.log("--> Remora.api: REQUEST: ");
+	console.log(request);
+
+	//send request
+	$.postMessage(
+		requestString,
+		remoteDomain,
+		iframe.get(0).contentWindow
+	);
+};
+
+/**
+ * Send response.
+ */
+Remora.post = function(data) {
+	//send request
+	$.postMessage(
+		data,
+		remoteDomain,
+		document.getElementById('remora').contentWindow
+	);
+};

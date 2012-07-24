@@ -1,0 +1,39 @@
+/**
+ * Page related code.
+ */
+$(document).ready(function(){
+	console.log('+ PAGE LOADED');
+
+	//BINDINGS
+	$('#volume').slider({
+		change: function(event, ui){
+			Remora.api('Grooveshark.setVolume', ui.value);
+		}
+	});
+
+	$('#play').on('click', function(){
+		Remora.api('Grooveshark.play');
+	});
+
+	$('#pause').on('click', function(){
+		Remora.api('Grooveshark.pause');
+	});
+
+	$('#rewind').on('click', function(){
+		Remora.api('Grooveshark.seekToPosition', 0);
+	});
+
+	$('#playPause').on('click', function(){
+		Remora.api('Grooveshark.togglePlayPause');
+	});
+
+	$('#previous').on('click', function(){
+		Remora.api('Grooveshark.previous');
+	});
+
+	$('#next').on('click', function(){
+		Remora.api('Grooveshark.next');
+	});
+
+	$('#bookmarklet').attr('href', "javascript:var e=document.createElement('script');e.setAttribute('src','" + location.href + "js/remora.local.js');document.body.appendChild(e);var e=document.createElement('iframe');e.setAttribute('id','remora');e.setAttribute('src','http://" + location.host + ":3000');e.setAttribute('style','display:none;');document.body.appendChild(e);void(0);");
+});

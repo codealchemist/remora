@@ -1,0 +1,51 @@
+/* 
+    Document   : default
+    Created on : Jul 24, 2012, 2:01:55 AM
+    Author     : code
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* FONTS */
+@font-face {
+  font-family: 'Rokkitt';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Rokkitt Bold'), local('Rokkitt-Bold'), url(http://themes.googleusercontent.com/static/fonts/rokkitt/v5/Mef17w3J4CtS0lw4Wa_8rxsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
+}
+@font-face {
+  font-family: 'Rokkitt';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Rokkitt'), url(http://themes.googleusercontent.com/static/fonts/rokkitt/v5/4Z-2qkHrI1biwaOxvW6ZTA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Codystar';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Codystar'), url(http://themes.googleusercontent.com/static/fonts/codystar/v1/BraFEMRumMsVbWgqTQIWRPesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+
+
+#currentSong{
+    margin:40px 0 10px 0;
+    font:400 normal normal 2em "Rokkitt";
+    text-spacing: 0.1em;
+    color:lightskyblue;
+}
+
+#songName {
+    color:orange;
+    font-family: 'Codystar';
+    font-size: 2em;
+    display: block;
+}
+
+#albumName{
+    color:#356635;
+}
+
+#artistName{
+    color:#333;
+    font-weight: 700;
+}
