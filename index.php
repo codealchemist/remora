@@ -8,7 +8,8 @@
     <meta name="author" content="alberto.php@gmail.com">
 
     <!-- Le styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/css/default.css" rel="stylesheet">
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.20/themes/smoothness/jquery-ui.css" rel="stylesheet">
     <style>
       body {
@@ -48,12 +49,17 @@
 		<p>Multi instance remote control for your beloved Grooveshark music!</p>
 		<br />
 
-		<button id="play" class="btn btn-large btn-primary" onclick="Remora.api('play')"><i class="icon-play"></i>Play</button>
-		<button id="pause" class="btn btn-large btn-info" onclick="Remora.api('pause')"><i class="icon-pause"></i> Pause</button>
-		<button id="rewind" class="btn btn-large" onclick="Remora.api('seekToPosition', 0)"><i class="icon-backward"></i> Rewind</button>
-		<button id="playPause" class="btn btn-large btn-warning" onclick="Remora.api('togglePlayPause')">Play / Pause</button>
-		<button id="previous" class="btn btn-large btn-info" onclick="Remora.api('previous')"><i class="icon-fast-backward"></i> Previous</button>
-		<button id="next" class="btn btn-large btn-info" onclick="Remora.api('next')"><i class="icon-fast-forward"></i> Next</button>
+        <div id="currentSong" style="display:none">
+            <span id="songName"></span>
+            by <span id="artistName"></span>
+            @<span id="albumName"></span>
+        </div>
+		<button id="play" class="btn btn-large btn-primary"><i class="icon-play"></i>Play</button>
+		<button id="pause" class="btn btn-large btn-info"><i class="icon-pause"></i> Pause</button>
+		<button id="rewind" class="btn btn-large"><i class="icon-backward"></i> Rewind</button>
+		<button id="playPause" class="btn btn-large btn-warning">Play / Pause</button>
+		<button id="previous" class="btn btn-large btn-info"><i class="icon-fast-backward"></i> Previous</button>
+		<button id="next" class="btn btn-large btn-info"><i class="icon-fast-forward"></i> Next</button>
 		<div style="margin:20px;">
 			<div id="volume" style="width:535px; float:left; margin:0 5px 0 0"></div>
 			<i class="icon-volume-up"></i>
@@ -71,24 +77,15 @@
 		</div>
     </div> <!-- /container -->
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <iframe id="remora" src="http://albertomiranda.com.ar:3000" style="display:none"></iframe>
+    
+    <!-- SCRIPTS; TODO: use loader -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/inject.js"></script>
-    <script src="js/remora.local.js"></script>
-	<script>
-		$(document).ready(function(){
-			$('#volume').slider({
-				change: function(event, ui){
-					Remora.api('setVolume', ui.value);
-				}
-			});
-
-			$('#bookmarklet').attr('href', "javascript:var e=document.createElement('script');e.setAttribute('src','" + location.href + "js/remora.local.js');document.body.appendChild(e);var e=document.createElement('iframe');e.setAttribute('id','remora');e.setAttribute('src','http://" + location.host + ":3000');e.setAttribute('style','display:none;');document.body.appendChild(e);void(0);");
-		});
-	</script>
+    <script src="public/js/lib/jquery.postmessage.lib.js"></script>
+    <script src="public/js/bootstrap.min.js"></script>
+	<script src="public/js/lib/remora.lib.js"></script>
+	<script src="public/js/remora.remote.js"></script>
+	<script src="public/js/pages/index.page.js"></script>
   </body>
 </html>
