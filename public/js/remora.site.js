@@ -104,6 +104,22 @@ $.receiveMessage(
 	},
 	Remora.remoteDomain
 );
+  
+//------------------------------------------------------------------------------
+//SITE INIT
+//TODO: load based on current site
+//Grooveshark: listen song change event
+GS.getNotice().subscribe("gs.player.playing", function(response){ 
+    //simulate a GS.player.currentSong request, which is bind to 
+    //Page.showCurrentSong, resulting in the update of current song title on
+    //remote control page
+    var request = {
+        "method": "GS.player.currentSong"
+    };
+    console.log("Remora: GS event: gs.player.playing --> firing Page.showCurrentSong");
+    Remora.post(response.activeSong, request);
+});
+//------------------------------------------------------------------------------
 
 if (location.host == 'grooveshark.com') {
 	alert('Remora attached!');
