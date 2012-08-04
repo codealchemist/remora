@@ -13,7 +13,7 @@ Current features:
 
 ## How it works?
 Remora provides javascript code you can use to create a special bookmark.
-While listening to your favorite music in the Grooveshark HTML5 site (http://grooveshark.com/html5) click this special bookmark.
+While listening to your favorite music in the Grooveshark site (http://grooveshark.com) click this special bookmark.
 It will inject Remora in Grooveshark's page, like a remora fish attaches to a shark ;)
 
 Remora will take care of crossdomain communication between Grooveshark instances and the Remora remote control page.
@@ -45,19 +45,21 @@ We might think about sync in the future.
 
 	`git clone git@github.com:codealchemist/remora.git`
 
-* Change the default Remora domain name in the files:
+* Change the default Remora remote domain name in the files:
 
-	`js/inject.js`
+	`public/js/inject.js`
 
-	`js/remora.local.js`
+	`public/js/remora.site.js`
 
-	`js/remora.meteor.js`
+	`public/js/lib/remora.lib.js`
 
-This can be any domain where you want to run Remora.
+	`meteor/remora.meteor.js`
+
+This should point to the URL where you are running Remora.
 You can use local network names or IPs to run inside a LAN.
+In a future release I plan to centralize config.
 
-* Copy the source for js/inject.js into your clipboard
-* Create a new bookmark in your web browser and paste inject code into location
+* Open Remora's index.php in a web browser and drag and drop the bookmarklet into the bookmarks bar.
 * Install Meteor
 
 	`curl install.meteor.com | /bin/sh`
@@ -66,13 +68,13 @@ You can use local network names or IPs to run inside a LAN.
 	`cd remora/meteor`
 
 	`meteor`
-* Open http://grooveshark.com/html5
-* Click your Remora bookmark
+* Open http://grooveshark.com
+* Click your Remora bookmark (you should see an alert with the text "Remora attached!")
 * Open Remora's remote control page
 * Start playing!
 
 ## Ideas?
-Yeah, we have more fun ideas for Remora.
+Yeah, we have more fun ideas for Remora, this is a first release to show that its concept actually works.
 
 And it will be interesting if you want to share yours here.
 
