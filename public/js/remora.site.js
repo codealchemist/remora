@@ -117,6 +117,10 @@ GS.getNotice().subscribe("gs.player.playing", function(response){
         "method": "GS.player.currentSong"
     };
     console.log("Remora: GS event: gs.player.playing --> firing Page.showCurrentSong");
+    
+    //get token so we can generate the song link and send data
+    var token = response.activeSong.getToken();
+    console.log("--> Remora: GOT SONG TOKEN: " + token);
     Remora.post(response.activeSong, request);
 });
 //------------------------------------------------------------------------------

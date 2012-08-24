@@ -39,7 +39,7 @@ $(document).ready(function(){
         setTimeout("Remora.api('GS.player.currentSong')", 1 * 1000);
 	});
 
-	$('#bookmarklet').attr('href', "javascript:var e=document.createElement('script');e.setAttribute('src','" + location.href + "js/remora.site.js');document.body.appendChild(e);var e=document.createElement('iframe');e.setAttribute('id','remora');e.setAttribute('src','http://" + location.host + ":3000');e.setAttribute('style','display:none;');document.body.appendChild(e);void(0);");
+	$('#bookmarklet').attr('href', "javascript:var e=document.createElement('script');e.setAttribute('src','" + location.href + "public/js/remora.site.js');document.body.appendChild(e);var e=document.createElement('iframe');e.setAttribute('id','remora');e.setAttribute('src','http://" + location.host + ":3000');e.setAttribute('style','display:none;');document.body.appendChild(e);void(0);");
 });
 
 //Page namespace
@@ -130,5 +130,11 @@ Page.showCurrentSong = function(response) {
     $('#artistName').html(response.ArtistName);
     $('#albumName').html(response.AlbumName);
     $('#currentSong').fadeIn();
+    
+    //show song link
+    if (response._token) {
+        var songUrl = "http://grooveshark.com/s/" + response.SongName + '/' + response._token;
+        $('#songLink').attr('href', songUrl);
+    }
     console.groupEnd();
 };
