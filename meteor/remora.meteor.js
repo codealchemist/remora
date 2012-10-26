@@ -1,6 +1,20 @@
 var Messages = new Meteor.Collection("messages");
 Messages.remove({}); // remove all
 
+
+Messages.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  },
+  fetch: ['owner']
+});
+
 //--------------------------------------------------------------------------------------
 //CLIENT
 if (Meteor.is_client) {	
@@ -19,41 +33,63 @@ if (Meteor.is_client) {
         "remoteDomain": "http://albertomiranda.com.ar",
         "siteDomain": "http://grooveshark.com"
     };
-		
-	//receive messages
-	$.receiveMessage(
-	  function(e){
-        console.group('+ SENDING NEW REQUEST: ');
-		console.log( e.data );
-        console.groupEnd();
-		Meteor.call('log', "(" + location.host + ") REQUEST STRING: " + e.data);
-		
-		var request = JSON.parse(e.data);
-		Messages.remove({}); // remove all
-		Messages.insert(request);
-	  }
-	);
-	
-	Meteor.autosubscribe(function(){
-		Messages.find().observe({
-			added: function(request){
-				//avoid startup broadcast
-				if (Messages.find().count() == 0) return false;
-				
-				//broadcast to selected target window
-                var target = request.target || "site";
-                target = Remora[target + "Domain"] || Remora.siteDomain;
-				console.group("+ NEW MESSAGE for '" + target + "':");
-                console.log(request.message);
-                console.groupEnd();
-				$.postMessage(
-					JSON.stringify(request),
-					target,
-					parent
-				);
-			}
-		});
-	});
+			
+    //get current client IP
+    $.ajax({
+        type: 'GET',
+        url: Remora.remoteDomain + '/remora/getIp.php',
+        async: false,
+        contentType: "application/json",
+        dataType: 'jsonp',
+        jsonpCallback: 'ipCallback',
+        async: false,
+        success: function(response) {
+            console.log('+ GOT CLIENT IP');
+            console.log(response);
+            var clientIp = response.ip;
+            
+            //receive messages
+            $.receiveMessage(
+                function(e){
+                    console.group('+ SENDING NEW REQUEST for IP: ' + clientIp);
+                    console.log( e.data );
+                    console.groupEnd();
+                    Meteor.call('log', "(" + location.host + ") REQUEST STRING: " + e.data);
+
+                    var request = JSON.parse(e.data);
+                    request.ip = clientIp;
+                    Messages.remove({}); // remove all
+                    Messages.insert(request);
+                }
+            );
+            
+            Meteor.autosubscribe(function(){
+                //TODO: get client IP and create sessions based on it; idea: broadcast per IP
+                Meteor.subscribe("messages", Session.get( clientIp ));
+                Messages.find().observe({
+                    added: function(request){
+                        //avoid startup broadcast
+                        if (Messages.find().count() == 0) return false;
+
+                        //broadcast to selected target window
+                        var target = request.target || "site";
+                        target = Remora[target + "Domain"] || Remora.siteDomain;
+                        console.group("+ NEW MESSAGE for '" + target + "':");
+                        console.log(request.message);
+                        console.groupEnd();
+                        $.postMessage(
+                            JSON.stringify(request),
+                            target,
+                            parent
+                        );
+                    }
+                });
+            });
+        },
+        error: function(e) {
+            console.log(e.message);
+        }
+    });
 }
 //--------------------------------------------------------------------------------------
 
